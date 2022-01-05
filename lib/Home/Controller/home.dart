@@ -13,15 +13,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-
-
-
-
-
-
-
-
-
   String url = 'https://randomuser.me/api/?results=20';
   List data = [];
   bool _isDataLoading = true;
