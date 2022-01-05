@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'Home/Controller/home.dart';
+import 'service/auth/auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() {
   runApp(const Main());
 }
+
+// Future main() async {
+//   await dotenv.load(fileName: '.env');
+//   await auth();
+//   runApp(const Main());
+// }
 
 class Main extends StatelessWidget {
   const Main({Key? key}) : super(key: key);
@@ -15,7 +22,8 @@ class Main extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: const Home(),
+      home: homeState,
+      // home: const Home(),
     );
   }
 }
