@@ -12,11 +12,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
+
+
+
+
+
+
+
+
   String url = 'https://randomuser.me/api/?results=20';
   List data = [];
   bool _isDataLoading = true;
 
   Future<List> _getUsers() async {
+
     var response = await http.get(
       Uri.parse(url),
       headers: {"Accept": 'application/json'},
