@@ -5,8 +5,8 @@ void main() async {
   final api = VrchatDart(userAgent: 'vrchat_dart_example');
 
   final loginResponse = await api.auth.login(
-    username: 'service.feedbox@simplelogin.co',
-    password: '7SRp7C{`9\\)"WlVlQ+%N;H@L%.v!9SE8HyJmiOuJ',
+    username: '',
+    password: '',
   );
 
   if (loginResponse.error != null) {
