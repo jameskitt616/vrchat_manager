@@ -16,10 +16,10 @@ Future<void> checkIfAlreadyAuthenticated() async {
 
   //TODO: check if cookie is expired and delete
   // storage.delete(key: 'cookie');
-  // String? expiresAt = await storage.read(key: 'Expires');
-  // String? maxAge = await storage.read(key: 'Max-Age');
+  // String? expiresAt = await storage.read(key: 'Expires', aOptions: getAndroidOptions());
+  // String? maxAge = await storage.read(key: 'Max-Age', aOptions: getAndroidOptions());
 
-  String? cookies = await storage.read(key: 'cookie');
+  String? cookies = await storage.read(key: 'cookie', aOptions: getAndroidOptions());
 
   if (cookies == null) {
     print('LoginPage');
@@ -30,6 +30,10 @@ Future<void> checkIfAlreadyAuthenticated() async {
     homeState = const Home();
   }
 }
+
+AndroidOptions getAndroidOptions() => const AndroidOptions(
+  encryptedSharedPreferences: true,
+);
 
 Future<bool> login(String username, String password) async {
 
@@ -66,7 +70,7 @@ Future<bool> login(String username, String password) async {
 
 
   const storage = FlutterSecureStorage();
-  String? oldCookie = await storage.read(key: 'cookie');
+  String? oldCookie = await storage.read(key: 'cookie', aOptions: getAndroidOptions());
 
   if (oldCookie != null) {
     return true;
@@ -83,11 +87,11 @@ Future<bool> login(String username, String password) async {
     return false;
   }
 
-  await storage.write(key: 'cookie', value: cookie);
+  await storage.write(key: 'cookie', value: cookie, aOptions: getAndroidOptions());
   return true;
 }
 
 Future<void> logout() async {
   const storage = FlutterSecureStorage();
-  await storage.delete(key: 'cookie');
+  await storage.delete(key: 'cookie', aOptions: getAndroidOptions());
 }
