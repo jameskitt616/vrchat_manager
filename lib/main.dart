@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'service/auth/auth.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await checkIfAlreadyAuthenticated();
   runApp(const Main());
 }
-
-// Future main() async {
-//   await dotenv.load(fileName: '.env');
-//   await auth();
-//   runApp(const Main());
-// }
 
 class Main extends StatelessWidget {
   const Main({Key? key}) : super(key: key);
@@ -23,13 +19,9 @@ class Main extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       home: homeState,
-      // home: const Home(),
     );
   }
 }
-
-// Login from https://api.vrchat.cloud/api/1/auth/user with Basic Auth to receive the apiKey & auth
-// (OPTIONAL) Receive and save apiKey from https://api.vrchat.cloud/api/1/config (NO LOGIN REQUIRED)
 
 // class HomePage extends StatefulWidget {
 //   @override

@@ -10,6 +10,27 @@ import 'package:vrchat_dart/vrchat_dart.dart';
 
 dynamic homeState = const LoginPage();
 
+
+Future<void> checkIfAlreadyAuthenticated() async {
+  const storage = FlutterSecureStorage();
+
+  //TODO: check if cookie is expired and delete
+  // storage.delete(key: 'cookie');
+  // String? expiresAt = await storage.read(key: 'Expires');
+  // String? maxAge = await storage.read(key: 'Max-Age');
+
+  String? cookies = await storage.read(key: 'cookie');
+
+  if (cookies == null) {
+    print('LoginPage');
+    homeState = const LoginPage();
+  } else {
+    print('Home');
+    // homeState = const HomePage();
+    homeState = const Home();
+  }
+}
+
 Future<bool> login(String username, String password) async {
 
 
@@ -51,6 +72,7 @@ Future<bool> login(String username, String password) async {
     return true;
   }
 
+  //TODO: check to do if 2FA enabled
   final String basicAuth =
       'Basic ' + base64Encode(utf8.encode('$username:$password'));
   final Uri url = Uri.https('api.vrchat.cloud', "/api/1/auth/user");
@@ -68,21 +90,4 @@ Future<bool> login(String username, String password) async {
 Future<void> logout() async {
   const storage = FlutterSecureStorage();
   await storage.delete(key: 'cookie');
-}
-
-Future<void> auth() async {
-  const storage = FlutterSecureStorage();
-  String? cookies = await storage.read(key: 'cookie');
-
-  //TODO: if cookie is expired
-  // storage.delete(key: 'cookie');
-
-  if (cookies == null) {
-    print('LoginPage');
-    homeState = const LoginPage();
-  } else {
-    print('Home');
-    // homeState = const HomePage();
-    homeState = const Home();
-  }
 }
